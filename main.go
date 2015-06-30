@@ -1,4 +1,14 @@
-package main
+// command atpl parses yaml and executes a go text/template against the
+// contents of that yaml.
+//
+//     atpl -input data.yml -template config.tpl
+// or
+//     atpl -template config.tpl < data.yml
+//
+// This will parse the yaml data into a generic structure (i.e. interface{},
+// []interface{}, and map[string]interface{}) and execute the template
+// config.tpl against that data.
+package main // import fknsrs.biz/p/atpl
 
 import (
 	"flag"
