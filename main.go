@@ -8,7 +8,7 @@
 // This will parse the yaml data into a generic structure (i.e. interface{},
 // []interface{}, and map[string]interface{}) and execute the template
 // config.tpl against that data.
-package main // import fknsrs.biz/p/atpl
+package main // import "fknsrs.biz/p/atpl"
 
 import (
 	"flag"
