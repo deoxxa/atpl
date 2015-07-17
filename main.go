@@ -22,6 +22,7 @@ import (
 
 var (
 	inputFile    = flag.String("input", "-", "YAML/JSON file to read input from (default stdin).")
+	outputFile   = flag.String("output", "-", "File to write the result to (default stdout).")
 	templateFile = flag.String("template", "", "Template file.")
 )
 
@@ -53,6 +54,16 @@ func main() {
 		input = f
 	}
 
+	output := os.Stdout
+	if *outputFile != "-" {
+		f, err := os.OpenFile(*outputFile, os.O_WRONLY|os.O_CREATE, 0644)
+		if err != nil {
+			panic(err)
+		}
+
+		output = f
+	}
+
 	d, err := ioutil.ReadAll(input)
 	if err != nil {
 		panic(err)
@@ -63,7 +74,7 @@ func main() {
 		panic(err)
 	}
 
-	if err := t.Execute(os.Stdout, v); err != nil {
+	if err := t.Execute(output, v); err != nil {
 		panic(err)
 	}
 }
